@@ -14,14 +14,42 @@ namespace Lab3Q1
          * @param start_idx starting index to search for words
          * @return number of words in the line
          */
-        public static int WordCount(ref string line, int start_idx)
+        public static int WordCount(string line, int start_idx)
         {
             // YOUR IMPLEMENTATION HERE
-
+            if(line.Length == 0) //error checking for invalid indices or empty string
+            {
+                Console.WriteLine("Empty string entered");
+                return 0;
+            }
+            int count = 0;
+            if (start_idx < 0 || start_idx >= line.Length)
+            {
+                Console.WriteLine("Invalid index entered");
+                return 0;
+            }
+            int i = start_idx;
+            while (i < line.Length) //iterate through the string
+            {
+                if(line[i]!=' ') //if the current character is not an empty space, we have encountered a word
+                {
+                    count += 1; //increment counter
+                    while (i < line.Length) //increment i until we finish current word, once we encounter whitespace we break inner while loop
+                    {
+                        if (line[i] != ' ')
+                        {
+                            i += 1;
+                        }
+                        else break; //break out of loop once whitespace encountered since current word has ended
+                    }
+                }
+                else //just increment i if it was whitespace
+                {
+                    i += 1;
+                }
+            }
             return count;
 
-
-          }
         }
 
 
@@ -47,20 +75,37 @@ namespace Lab3Q1
 
              while ((line = file.ReadLine()) != null)
              {
-               //=================================================
-               // YOUR JOB TO ADD WORD COUNT INFORMATION TO MAP
-               //=================================================
+                //=================================================
+                // YOUR JOB TO ADD WORD COUNT INFORMATION TO MAP
+                //=================================================
 
-                 // Is the line a dialogueLine?
-                 //    If yes, get the index and the character name.
-                 //      if index > 0 and character not empty
-                 //        get the word counts
-                 //          if the key exists, update the word counts
-                 //          else add a new key-value to the dictionary
-                 //    reset the character
+                // Is the line a dialogueLine?
+                //    If yes, get the index and the character name.
+                //      if index > 0 and character not empty
+                //        get the word counts
+                //          if the key exists, update the word counts
+                //          else add a new key-value to the dictionary
+                //    reset the character
+                int index = IsDialogueLine(line, ref character);
+                if (index>0 && character!="") //check if line is a dialogue
+                {
+                    int numWords = WordCount(line, index);
+                    mutex.WaitOne();
+                    if (wcounts.ContainsKey(character)) //check if dictionary already contains this character
+                    {
+                        wcounts[character] += numWords;
+                    }
+                    else
+                    {
+                        wcounts.Add(character, numWords); //add new key, character, if dictionary didn't contain
+                    }
+                    mutex.ReleaseMutex();
+             
+                }
 
-               }
-               // Close the file
+            }
+            // Close the file
+            file.Close();
         }
 
 
@@ -131,8 +176,13 @@ namespace Lab3Q1
         public static List<Tuple<int, string>> SortCharactersByWordcount(Dictionary<string, int> wordcount)
         {
 
-          // Implement sorting by word count here
-
+            // Implement sorting by word count here
+            List<Tuple<int, string>> sortedByValueList = new List<Tuple<int, string>>();
+            foreach(KeyValuePair<string,int> item in wordcount) //iterate over key-value pairs
+            {
+                sortedByValueList.Add(new Tuple<int, string>(item.Value, item.Key)); //add each pair to sorted list
+            }
+            sortedByValueList = sortedByValueList.OrderByDescending(t => t.Item1).ToList(); //sort list by count descending
             return sortedByValueList;
 
         }
@@ -148,7 +198,10 @@ namespace Lab3Q1
         {
 
           // Implement printing here
-
+          foreach(var tup in sortedList)
+            {
+                Console.WriteLine("{0}:{1}", tup.Item2, tup.Item1);
+            }
         }
     }
 }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">anycpu</Platform>
+    <ProjectGuid>{0A0EF68F-0014-43AA-A679-8F3122FFA6BF}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Lab3</RootNamespace>
+    <AssemblyName>Lab3</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <StartupObject>Lab3Q1.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|anycpu' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|anycpu' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="HelperFunctions.cs" />
+    <Compile Include="WordCountTester.cs" />
+    <Compile Include="UnitTestException.cs" />
+    <Compile Include="Program.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+    <None Include="data\shakespeare_king_richard_II.txt" />
+    <None Include="data\shakespeare_much_ado.txt" />
+    <None Include="data\shakespeare_alls_well.txt" />
+    <None Include="data\shakespeare_king_henry_VI_first.txt" />
+    <None Include="data\shakespeare_king_henry_IV_second.txt" />
+    <None Include="data\shakespeare_macbeth.txt" />
+    <None Include="data\shakespeare_loves_labours_lost.txt" />
+    <None Include="data\shakespeare_king_henry_VI_third.txt" />
+    <None Include="data\copyright.txt" />
+    <None Include="data\shakespeare_romeo_and_juliet.txt" />
+    <None Include="data\shakespeare_king_john.txt" />
+    <None Include="data\shakespeare_measure_for_measure.txt" />
+    <None Include="data\shakespeare_king_henry_V.txt" />
+    <None Include="data\shakespeare_coriolanus.txt" />
+    <None Include="data\shakespeare_comedy_of_errors.txt" />
+    <None Include="data\shakespeare_othello.txt" />
+    <None Include="data\shakespeare_gentlemen_of_verona.txt" />
+    <None Include="data\shakespeare_king_richard_III.txt" />
+    <None Include="data\shakespeare_cymbeline.txt" />
+    <None Include="data\shakespeare_lovers_complaint.txt" />
+    <None Include="data\shakespeare_king_henry_VI_second.txt" />
+    <None Include="data\shakespeare_king_lear.txt" />
+    <None Include="data\shakespeare_titus_andronicus.txt" />
+    <None Include="data\shakespeare_romeo_and_juliet_prologue.txt" />
+    <None Include="data\shakespeare_winters_tale.txt" />
+    <None Include="data\shakespeare_sonnets.txt" />
+    <None Include="data\shakespeare_king_henry_VIII.txt" />
+    <None Include="data\shakespeare_troilus_and_cressida.txt" />
+    <None Include="data\shakespeare_king_henry_IV_first.txt" />
+    <None Include="data\shakespeare_antony_cleopatra.txt" />
+    <None Include="data\shakespeare_merchant_of_venice.txt" />
+    <None Include="data\shakespeare_hamlet.txt" />
+    <None Include="data\shakespeare_wives_of_windsor.txt" />
+    <None Include="data\shakespeare_timon_of_athens.txt" />
+    <None Include="data\shakespeare_twelfth_night.txt" />
+    <None Include="data\shakespeare_midsummer_nights_dream.txt" />
+    <None Include="data\shakespeare_taming_of_the_shrew.txt" />
+    <None Include="data\shakespeare_tempest.txt" />
+    <None Include="data\shakespeare_as_you_like_it.txt" />
+    <None Include="data\shakespeare_julius_caesar.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
