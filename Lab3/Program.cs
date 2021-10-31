@@ -30,10 +30,14 @@ namespace Lab3Q1
            //=============================================================
            // YOUR IMPLEMENTATION HERE TO COUNT WORDS IN SINGLE THREAD
            //=============================================================
+           Stopwatch singleThreadWatch = new Stopwatch();
+           singleThreadWatch.Start();
            foreach(string myFile in filenames)
             {
                 HelperFunctions.CountCharacterWords(myFile, mutex, wcountsSingleThread);
             }
+           singleThreadWatch.Stop();
+           TimeSpan ts1 = singleThreadWatch.Elapsed;
            HelperFunctions.PrintListofTuples(HelperFunctions.SortCharactersByWordcount(wcountsSingleThread));
            Console.WriteLine( "SingleThread is Done!");
             //=============================================================
@@ -43,6 +47,9 @@ namespace Lab3Q1
             int numFiles = 10;
             Thread[] threads = new Thread[numFiles];
             int i = 0;
+
+            Stopwatch multiThreadWatch = new Stopwatch();
+            multiThreadWatch.Start();
             foreach (string myFile in filenames)//traverse over files and create a new thread to count character counts of each file
             {
                 threads[i] = new Thread(() => HelperFunctions.CountCharacterWords(myFile, mutex, wcountsMultiThread));
@@ -54,11 +61,14 @@ namespace Lab3Q1
             {
                 threads[j].Join();
             }
-
+            multiThreadWatch.Stop();
+            TimeSpan ts2 = multiThreadWatch.Elapsed;
             HelperFunctions.PrintListofTuples(HelperFunctions.SortCharactersByWordcount(wcountsMultiThread));
 
             Console.WriteLine( "MultiThread is Done!");
-           return 0;
+            Console.WriteLine("single thread time: {0}", ts1);
+            Console.WriteLine("multi thread time: {0}", ts2);
+            return 0;
         }
     }
 }

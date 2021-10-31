@@ -74,5 +74,8 @@
     <None Include="data\shakespeare_as_you_like_it.txt" />
     <None Include="data\shakespeare_julius_caesar.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
